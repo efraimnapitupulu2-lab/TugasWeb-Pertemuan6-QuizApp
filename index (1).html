@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>JS Sprint — Kuis Interaktif JavaScript</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <button id="themeToggle" class="theme-toggle" aria-label="Ganti mode gelap/terang" title="Ganti tema">
+    <span class="theme-toggle__icon">◐</span>
+  </button>
+
+  <main class="stage">
+
+    <!-- SCREEN: START -->
+    <section class="screen screen--start" id="screen-start" data-screen>
+      <p class="eyebrow-free">JS Sprint</p>
+      <h1 class="hero-title">Seberapa dalam kamu<br>kenal JavaScript?</h1>
+      <p class="hero-sub">10 pertanyaan acak dari tiga topik &mdash; dasar bahasa, DOM &amp; event, sampai asynchronous. Setiap soal punya waktu 20 detik.</p>
+
+      <div class="category-chips" id="categoryChips" aria-label="Topik yang akan diuji"></div>
+
+      <button class="btn btn--primary" id="startBtn">Mulai Kuis</button>
+
+      <p class="high-score" id="startHighScore"></p>
+    </section>
+
+    <!-- SCREEN: QUIZ -->
+    <section class="screen screen--quiz" id="screen-quiz" data-screen hidden>
+      <div class="quiz-top">
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-meta">
+          <span class="question-count" id="questionCount">Soal 1/10</span>
+          <div class="timer-ring" id="timerRing">
+            <svg viewBox="0 0 44 44">
+              <circle class="timer-ring__track" cx="22" cy="22" r="19"></circle>
+              <circle class="timer-ring__fill" id="timerCircle" cx="22" cy="22" r="19"></circle>
+            </svg>
+            <span class="timer-ring__label" id="timerLabel">20</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="question-category" id="questionCategory">Dasar JavaScript</p>
+      <h2 class="question-text" id="questionText">Pertanyaan akan tampil di sini</h2>
+
+      <div class="answers" id="answers" role="list"></div>
+
+      <p class="score-live">Skor sementara: <strong id="liveScore">0</strong></p>
+    </section>
+
+    <!-- SCREEN: RESULT -->
+    <section class="screen screen--result" id="screen-result" data-screen hidden>
+      <p class="eyebrow-free" id="resultBadge">Selesai!</p>
+      <h2 class="result-score" id="resultScore">0 / 10</h2>
+      <p class="result-message" id="resultMessage"></p>
+
+      <div class="result-stats">
+        <div class="stat">
+          <span class="stat-label">Skor kamu</span>
+          <span class="stat-value" id="statScore">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Skor tertinggi</span>
+          <span class="stat-value" id="statHighScore">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Rata-rata waktu</span>
+          <span class="stat-value" id="statTime">0s</span>
+        </div>
+      </div>
+
+      <button class="btn btn--primary" id="restartBtn">Coba Lagi</button>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

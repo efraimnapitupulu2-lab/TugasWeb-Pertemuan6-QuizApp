@@ -1,0 +1,359 @@
+/* ==========================================================================
+   JS Sprint — Quiz App styles
+   Token system:
+   Color   — base #0F1B2B (bg), panel #16283D, accent #F2B84B (gold),
+             success #4FB477, danger #E8574A, text #EDEFF2, muted #7C93AC
+   Type    — Fraunces (display/headline), Inter (body/UI), JetBrains Mono (data/timer)
+   ========================================================================== */
+
+:root {
+  --bg: #0F1B2B;
+  --panel: #16283D;
+  --panel-raised: #1D3049;
+  --accent: #F2B84B;
+  --accent-ink: #2A1B04;
+  --success: #4FB477;
+  --danger: #E8574A;
+  --text: #EDEFF2;
+  --muted: #83A0C1;
+  --border: rgba(237, 239, 242, 0.10);
+  --shadow: rgba(4, 9, 16, 0.45);
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+}
+
+:root[data-theme="light"] {
+  --bg: #F4F1E9;
+  --panel: #FFFFFF;
+  --panel-raised: #FBF8F0;
+  --accent: #C7761F;
+  --accent-ink: #FFF7EA;
+  --success: #2E8B57;
+  --danger: #C7362A;
+  --text: #201B12;
+  --muted: #6B6255;
+  --border: rgba(32, 27, 18, 0.10);
+  --shadow: rgba(32, 27, 18, 0.12);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #F4F1E9;
+    --panel: #FFFFFF;
+    --panel-raised: #FBF8F0;
+    --accent: #C7761F;
+    --accent-ink: #FFF7EA;
+    --success: #2E8B57;
+    --danger: #C7362A;
+    --text: #201B12;
+    --muted: #6B6255;
+    --border: rgba(32, 27, 18, 0.10);
+    --shadow: rgba(32, 27, 18, 0.12);
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  transition: background 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+}
+
+.stage {
+  width: 100%;
+  max-width: 560px;
+}
+
+/* -------------------- Theme toggle -------------------- */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background 0.3s ease;
+  z-index: 10;
+}
+.theme-toggle:hover { transform: scale(1.08); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* -------------------- Screens -------------------- */
+.screen {
+  animation: rise 0.5s ease both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen, .answer-btn, .theme-toggle { animation: none !important; transition: none !important; }
+}
+
+/* -------------------- Start screen -------------------- */
+.eyebrow-free {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  margin: 0 0 14px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(32px, 6vw, 46px);
+  line-height: 1.12;
+  margin: 0 0 16px;
+}
+
+.hero-sub {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 46ch;
+  margin: 0 0 28px;
+}
+
+.category-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.category-chip {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  padding: 7px 13px;
+  border-radius: 8px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 16px;
+  padding: 14px 28px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 10px 24px -8px var(--shadow);
+}
+.btn--primary:hover { transform: translateY(-2px); }
+.btn--primary:active { transform: translateY(0); }
+.btn--primary:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+
+.high-score {
+  margin-top: 22px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* -------------------- Quiz screen -------------------- */
+.quiz-top {
+  margin-bottom: 22px;
+}
+
+.progress-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--panel);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 10%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width 0.35s ease;
+}
+
+.quiz-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.question-count {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.timer-ring {
+  position: relative;
+  width: 44px;
+  height: 44px;
+}
+.timer-ring svg { width: 44px; height: 44px; transform: rotate(-90deg); }
+.timer-ring__track {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 4;
+}
+.timer-ring__fill {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 119.4;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear, stroke 0.3s ease;
+}
+.timer-ring__label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+}
+.timer-ring.is-urgent .timer-ring__fill { stroke: var(--danger); }
+.timer-ring.is-urgent .timer-ring__label { color: var(--danger); }
+
+.question-category {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--accent);
+  margin: 0 0 10px;
+}
+
+.question-text {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(22px, 4vw, 28px);
+  line-height: 1.3;
+  margin: 0 0 26px;
+  min-height: 2.6em;
+}
+
+.answers {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.answer-btn {
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.1s ease, background 0.2s ease;
+  animation: rise 0.35s ease both;
+}
+.answer-btn:hover:not(:disabled) { border-color: var(--accent); transform: translateX(2px); }
+.answer-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.answer-btn:disabled { cursor: default; }
+
+.answer-btn.is-correct {
+  background: color-mix(in srgb, var(--success) 22%, var(--panel));
+  border-color: var(--success);
+  color: var(--success);
+  font-weight: 600;
+}
+.answer-btn.is-wrong {
+  background: color-mix(in srgb, var(--danger) 20%, var(--panel));
+  border-color: var(--danger);
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.score-live {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+}
+.score-live strong { color: var(--text); }
+
+/* -------------------- Result screen -------------------- */
+.result-score {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(44px, 9vw, 64px);
+  margin: 0 0 10px;
+}
+
+.result-message {
+  color: var(--muted);
+  font-size: 16px;
+  max-width: 40ch;
+  margin: 0 0 28px;
+}
+
+.result-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 10px;
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* -------------------- Responsive -------------------- */
+@media (max-width: 480px) {
+  .result-stats { grid-template-columns: 1fr; }
+  body { padding: 24px 16px; }
+}
