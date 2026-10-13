@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aplikasi kuis interaktif tugas Pemrograman Web Pertemuan 6.">
+  <title>Interactive Quiz App</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <div class="eyebrow">TUGAS WEB • PERTEMUAN 6</div>
+      <h1>Interactive Quiz</h1>
+      <p>Uji pemahaman dasar HTML, CSS, JavaScript, dan DOM.</p>
+    </header>
+    <section class="quiz-card" aria-live="polite">
+      <div class="topline"><span id="progress">Soal 1/7</span><span id="score-live">Skor: 0</span></div>
+      <div class="progress-track" aria-label="Progress kuis"><div id="progress-bar" class="progress-bar"></div></div>
+      <div id="quiz-content" class="quiz-content">
+        <h2 id="question">Memuat soal...</h2>
+        <div id="options" class="options-grid"></div>
+        <p id="feedback" class="feedback" role="status"></p>
+        <button id="next-btn" class="primary-btn hidden" type="button">Soal berikutnya →</button>
+      </div>
+      <section id="result" class="result hidden">
+        <div class="result-icon" aria-hidden="true">🏆</div><h2>Kuis selesai!</h2>
+        <p class="result-score">Skor kamu: <strong id="final-score">0/7 (0%)</strong></p>
+        <p>High score tersimpan: <strong id="high-score">0%</strong></p>
+        <p id="result-message" class="result-message"></p>
+        <button id="restart-btn" class="primary-btn" type="button">↻ Ulangi kuis</button>
+      </section>
+    </section>
+    <footer>High score disimpan di browser ini menggunakan LocalStorage.</footer>
+  </main>
+</body>
+</html>

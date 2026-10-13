@@ -1,57 +1,55 @@
-# JS Sprint — Interactive Quiz App
+# Interactive Quiz App — Tugas Web Pertemuan 6
 
-Tugas Rutin 6 — Mata Kuliah Pemrograman Web
-Program Studi Ilmu Komputer, Universitas Negeri Medan
-
-## Deskripsi
-
-JS Sprint adalah kuis interaktif seputar dasar JavaScript, DOM & Event, serta
-Asynchronous JavaScript. Setiap sesi menampilkan 10 soal yang dipilih dan
-diacak secara random dari bank soal, masing-masing dengan batas waktu 20 detik.
+Aplikasi kuis interaktif untuk tugas Pemrograman Web, materi JavaScript DOM & Event Handling.
 
 ## Fitur
+- 7 pertanyaan pilihan ganda.
+- Skor otomatis ditampilkan pada akhir kuis.
+- High score tersimpan menggunakan `localStorage`.
+- Soal dan pilihan dirender dengan `createElement()` dan `textContent`.
+- Event delegation untuk pilihan jawaban.
+- Feedback visual: hijau untuk jawaban benar dan merah untuk jawaban salah.
+- Progress bar, penjelasan jawaban, dan tombol restart.
+- Kuis berjalan tanpa reload halaman.
 
-- **ES6+**: `const`/`let`, arrow function, template literal di seluruh kode.
-- **Render soal via `createElement` & `textContent`** — tidak menggunakan `innerHTML`.
-- **Event delegation** — satu `addEventListener` pada container jawaban menangani seluruh tombol.
-- **Skor otomatis** dan **high score** tersimpan di `localStorage`.
-- **Navigasi SPA** antar layar (start → quiz → result) tanpa reload halaman.
-- **Feedback visual**: jawaban benar berwarna hijau, salah berwarna merah.
-- **Tombol Restart** untuk mengulang dari awal.
-- **Bonus**:
-  - Timer melingkar per soal (20 detik, berubah warna saat waktu hampir habis).
-  - Progress bar di atas soal.
-  - Kategori soal diacak/dipilih random dari bank soal (bukan urutan tetap).
-  - Animasi transisi masuk pada tiap soal dan jawaban.
-  - Dark mode / light mode toggle (tersimpan di `localStorage`, mengikuti preferensi sistem sebagai default).
+## Cara menjalankan
+1. Ekstrak folder project.
+2. Buka `index.html` menggunakan Chrome, Edge, Firefox, atau browser modern lainnya.
+3. Jawab soal sampai selesai dan coba tombol **Ulangi kuis**.
 
-## Struktur Berkas
+Tidak perlu menginstal package atau menjalankan server.
 
+## Struktur folder
+```text
+TugasWeb-Pertemuan6-QuizApp/
+├── index.html
+├── style.css
+├── app.js
+├── README.md
+└── .gitignore
 ```
-├── index.html   # Struktur halaman & tiga "screen" SPA (start, quiz, result)
-├── style.css    # Desain visual, dark/light theme, animasi
-├── script.js    # Logika kuis, state, timer, localStorage, event delegation
-└── README.md
-```
 
-## Cara Menjalankan
+## Konsep yang digunakan
+- DOM selection: `document.querySelector()`.
+- DOM manipulation: `document.createElement()`, `textContent`, `append()`, `replaceChildren()`.
+- Event handling: `addEventListener()`.
+- Event delegation: `event.target.closest()` pada container pilihan.
+- Web Storage: `localStorage.getItem()` dan `localStorage.setItem()`.
+- ES6+: `const`, `let`, arrow functions, template literals, dan array methods.
 
-Tidak memerlukan build tool maupun server khusus:
+## Pengumpulan ke GitHub
+Nama repository yang diminta pada materi:
+`TugasWeb-Pertemuan6-QuizApp`
 
-1. Clone / unduh repo ini.
-2. Buka `index.html` langsung di browser (double click, atau gunakan ekstensi
-   Live Server pada VS Code untuk reload otomatis saat development).
+1. Buat repository dengan nama tersebut di GitHub dan pilih **Public**.
+2. Unggah semua file dalam folder ini.
+3. Tes kembali aplikasi di browser.
+4. Salin link repository dan kumpulkan melalui LMS UNIMED sesuai arahan dosen.
 
-## Cara Bermain
-
-1. Klik **Mulai Kuis** dari halaman awal.
-2. Pilih salah satu dari empat opsi jawaban sebelum waktu 20 detik habis.
-3. Jawaban benar akan berubah hijau, jawaban salah (jika dipilih) berubah merah.
-4. Setelah 10 soal selesai, skor akhir dan skor tertinggi akan ditampilkan.
-5. Klik **Coba Lagi** untuk mengulang dengan set soal yang baru diacak.
-
-## Catatan Pengembangan
-
-Bank soal berjumlah 15 butir dari 3 kategori; setiap sesi kuis mengacak
-urutan bank lalu mengambil 10 soal pertama, sehingga kombinasi dan urutan
-soal yang muncul akan berbeda pada tiap sesi bermain.
+## Checklist pengujian
+- [ ] Kuis memiliki minimal 5 pertanyaan.
+- [ ] Satu soal hanya bisa dijawab sekali.
+- [ ] Jawaban benar berwarna hijau dan salah merah.
+- [ ] Skor akhir sesuai jawaban yang benar.
+- [ ] High score masih ada setelah browser ditutup dan dibuka kembali pada browser yang sama.
+- [ ] Tombol restart memulai kuis dari soal pertama tanpa menghapus high score.
